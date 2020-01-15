@@ -1,7 +1,15 @@
 const axios = require ('axios');
 const Dev = require('../models/Dev');
+const parseString = require('../utils/parseStringAsArray');
+
+//Controller funções
+// index, show, store, update, destroy
 
 module.exports = {
+    async index(request, response){
+        const devs = await Dev.find();
+        return response.json(devs);
+    },
     async store(request, response) {
         const { github_username , techs, latitude, longitude } = request.body;
         
@@ -19,7 +27,7 @@ module.exports = {
                 name = login;
             }
     
-            const techsarray = techs.split(',').map(tech => tech.trim());
+            const techsarray = parseString(techs);
             console.log(name, avatar_url, bio, github_username, techsarray);
     
             const location = {
