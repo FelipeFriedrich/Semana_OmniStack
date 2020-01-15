@@ -6,7 +6,7 @@ const parseString = require('../utils/parseStringAsArray');
 // index, show, store, update, destroy
 
 module.exports = {
-    async index(request, response){
+    async index(response){
         const devs = await Dev.find();
         return response.json(devs);
     },
@@ -35,7 +35,7 @@ module.exports = {
                 coordinates: [longitude, latitude] 
             };
     
-            const dev = await Dev.create({
+            dev = await Dev.create({
                 github_username,
                 name,
                 avatar_url,
@@ -43,6 +43,7 @@ module.exports = {
                 techs: techsarray,
                 location
             });
+            response.status(201);
         }
         
         return response.json(dev);
