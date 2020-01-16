@@ -26,7 +26,7 @@ module.exports = {
                 let {login} = apiResponse.data;
                 name = login;
             }
-    
+            console.log(techs);
             const techsarray = parseString(techs);
             console.log(name, avatar_url, bio, github_username, techsarray);
     
